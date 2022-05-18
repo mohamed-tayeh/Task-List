@@ -1,0 +1,81 @@
+:root {
+  --number-of-tasks: 0;
+  --text-color: 'white';
+  --background-color: 'black';
+  --background-opacity: 0.5;
+  --div-height: 26px;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  /* background-color: var(--background-color);
+  opacity: var(--background-opacity); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#main-container {
+  height: 605px;
+  width: 500px;
+  background-color: var(--background-color);
+  opacity: var(--background-opacity);
+  border-radius: 5px;
+  padding: 5px 10px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#title {
+  /* color: #2828fa; */
+  color: white;
+  font-size: 35px;
+  text-align: center;
+  height: 35px;
+}
+
+.task-wrapper {
+  width: 500px;
+  height: 560px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+#task-container {
+  width: 500px;
+  height: calc(var(--div-height) * var(--number-of-tasks)) px !important;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.task-div {
+  margin: 2.5px 0px;
+  height: 26px;
+  display: flex;
+}
+
+.sender {
+  margin-right: 8px;
+}
+
+.sender,
+.task-content {
+  display: grid;
+  align-items: center;
+  color: var(--text-color);
+  font-size: 23px;
+}
+
+#title,
+.sender,
+.task-content {
+  font-family: 'Roboto', sans-serif;
+}
+
+.finished {
+  text-decoration: line-through;
+}
