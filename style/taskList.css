@@ -1,81 +1,163 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
 :root {
   --number-of-tasks: 0;
   --text-color: 'white';
-  --background-color: 'black';
-  --background-opacity: 0.5;
-  --div-height: 26px;
+  --height: '605px';
+  --width: '500px';
+  --background-red: 0;
+  --background-green: 0;
+  --background-blue: 0;
+  --background-opacity: 0;
 }
 
 body {
-  width: 100%;
-  height: 100%;
-  /* background-color: var(--background-color);
-  opacity: var(--background-opacity); */
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  font-family: Poppins;
+  color: var(--text-color);
 }
 
 #main-container {
-  height: 605px;
-  width: 500px;
-  background-color: var(--background-color);
-  opacity: var(--background-opacity);
+  height: var(--height);
+  width: var(--width);
+  background: rgba(
+    var(--background-red),
+    var(--background-green),
+    var(--background-blue),
+    var(--background-opacity)
+  );
   border-radius: 5px;
-  padding: 5px 10px;
-  overflow: hidden;
 
   display: flex;
   flex-direction: column;
+}
+
+/* Header */
+.header {
+  display: flex;
+  margin: 5px 5px 10px 5px;
 }
 
 #title {
-  /* color: #2828fa; */
-  color: white;
-  font-size: 35px;
+  font-size: 24px;
   text-align: center;
-  height: 35px;
+  height: 24px;
+  margin-right: auto;
 }
 
+#tasks-number {
+  margin-left: auto;
+  font-size: 24px;
+  height: 24px;
+}
+
+/* Task body */
+
 .task-wrapper {
-  width: 500px;
-  height: 560px;
+  height: 100%;
   overflow: hidden;
-  margin-top: 5px;
+  margin: 0 5px 10px 5px;
 }
 
 #task-container {
-  width: 500px;
-  height: calc(var(--div-height) * var(--number-of-tasks)) px !important;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
 }
 
+/* Individual Task */
+
 .task-div {
-  margin: 2.5px 0px;
-  height: 26px;
   display: flex;
+  margin-bottom: 10px;
 }
 
 .sender {
   margin-right: 8px;
+  margin-bottom: auto;
 }
 
 .sender,
 .task-content {
   display: grid;
   align-items: center;
-  color: var(--text-color);
-  font-size: 23px;
-}
-
-#title,
-.sender,
-.task-content {
-  font-family: 'Roboto', sans-serif;
 }
 
 .finished {
   text-decoration: line-through;
 }
+
+/* Checkbox styling */
+
+.checkbox {
+  display: grid;
+  place-items: center;
+  margin-top: 2px;
+
+  margin-bottom: auto;
+}
+
+input[type='checkbox'] {
+  display: none;
+}
+
+input[type='checkbox'] + label {
+  display: inline-block;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  position: relative;
+}
+
+input[type='checkbox']:checked + label:after {
+  content: '✔';
+  display: grid;
+  width: 10px;
+  height: 10px;
+  font-size: 0.7em;
+  place-items: center;
+}
+
+/*
+
+- More than one task
+
+1. data structures for it
+2. Store all the tasks in progress + compeleted
+3. grouping people's tasks together - in order of the people first putting up a task
+
+
+Options: 
+
+1. 2 maps: for the tasks in progress and one for done; key is senderId and value is the list of tasks 
+in the order that they were given
+2. 1 map: key is sender id and value is list of tasks objects {value: text-of-task, done: false/true}
+
+Criteria:
+1. should allow to list each peron's tasks in their own section
+2. the tasks should be ordered based on in progress first, then the completed
+3. should allow for easy and efficient grouping of each peron's task
+
+
+- clean up the code
+
+- all time progress
+
+- today's progress
+
+Customizable Settings:
+- Font family
+- Font size
+- Responses
+
+Non-customizable:
+- Spacing between tasks
+- title positions
+*/

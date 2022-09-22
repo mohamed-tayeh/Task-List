@@ -5,11 +5,12 @@ let configs = (function () {
   const channel = '';
   const username = '';
   const oauth = ''; // Should be oauth:<token>
-  const channelBots = ['streamelements', 'nightbot', 'streamlabs'];
 
-  const textColor = 'white';
-  const backgroundColor = 'black';
-  const backgroundOpacity = 0.5;
+  const height = '570px';
+  const width = '376px';
+  const textColor = 'white'; //  hex or name
+  const backgroundColor = '#000000'; // hex only
+  const backgroundOpacity = 0; // 0 to 1 (0 is transparent)
 
   // Add task commands
   const addTaskCommands = [
@@ -36,7 +37,13 @@ let configs = (function () {
   ];
 
   // Edit task commands
-  const editTaskCommands = ['!taske', '!taskedit', '!etask', '!edittask'];
+  const editTaskCommands = [
+    '!taske',
+    '!taskedit',
+    '!etask',
+    '!edittask',
+    '!edit',
+  ];
 
   // Finish task commands
   const finishTaskCommands = [
@@ -96,6 +103,8 @@ let configs = (function () {
     textColor,
     backgroundColor,
     backgroundOpacity,
+    height,
+    width,
   };
 
   const commands = {
@@ -129,7 +138,6 @@ let configs = (function () {
   module.styles = styles;
   module.commands = commands;
   module.responses = responses;
-  module.channelBots = channelBots;
 
   return module;
 })();

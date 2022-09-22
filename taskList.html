@@ -4,22 +4,23 @@
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
     <meta content="utf-8" http-equiv="encoding" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <link href="./style/cssReset.css" rel="stylesheet" />
     <link href="./style/taskList.css" rel="stylesheet" />
+    <script src="./lib/tmi.min.js"></script>
+    <script src="./configs.js"></script>
+    <script src="./js/styles.js"></script>
+    <script src="./js/constants.js"></script>
+    <script src="./js/taskList.js"></script>
   </head>
   <body>
     <div id="main-container">
-      <div id="title">!Tasks Finished: 0</div>
+      <div class="header">
+        <div id="title">!Tasks</div>
+        <div id="tasks-number">0/0</div>
+      </div>
       <div class="task-wrapper">
         <div id="task-container"></div>
       </div>
     </div>
-
-    <script src="./lib/tmi.min.js" defer></script>
-    <script src="./configs.js" defer></script>
-    <script src="./js/constants.js" defer></script>
-    <script src="./js/api.js" defer></script>
-    <script src="./js/helpers.js" defer></script>
-    <script src="./js/taskList.js" defer></script>
   </body>
 </html>
