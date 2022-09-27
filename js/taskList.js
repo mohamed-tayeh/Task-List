@@ -171,13 +171,13 @@
 
       // create username
       let senderDiv = document.createElement('div');
-      senderDiv.innerHTML = senderId + ':';
+      senderDiv.textContent = senderId + ':';
       senderDiv.classList.add(constants.taskSenderClass);
       taskDiv.appendChild(senderDiv);
 
       // create the task
       let taskContentDiv = document.createElement('div');
-      taskContentDiv.innerHTML = taskContent;
+      taskContentDiv.textContent = taskContent;
 
       taskContentDiv.classList.add(constants.taskContentClass);
       taskDiv.appendChild(taskContentDiv);
@@ -227,7 +227,7 @@
 
     function updateTasksNumber() {
       let tasksNumberDiv = document.getElementById(constants.tasksNumber);
-      tasksNumberDiv.innerHTML = `${tasksDone}/${tasks}`;
+      tasksNumberDiv.textContent = `${tasksDone}/${tasks}`;
     }
 
     /**
@@ -265,7 +265,7 @@
         let taskContentDiv = taskDiv.querySelectorAll(
           `.${constants.taskContentClass}`
         );
-        taskContentDiv[0].innerHTML = taskContent;
+        taskContentDiv[0].textContent = taskContent;
 
         editDuplicate(senderId, taskContent);
         updateAnimation();
@@ -334,7 +334,7 @@
 
       // ? not sure why 8 makes it a perfect loop
       // ? maybe because of margin-bottom for the last task
-      style.innerHTML = keyFrames.replace(
+      style.textContent = keyFrames.replace(
         /A_DYNAMIC_VALUE/g,
         -(taskContainerHeight / 2)
       );
@@ -460,7 +460,7 @@
         let taskContentDiv = taskDiv.querySelectorAll(
           `.${constants.taskContentClass}`
         );
-        taskContentDiv[0].innerHTML = taskContent;
+        taskContentDiv[0].textContent = taskContent;
       }
     }
 
@@ -599,13 +599,13 @@ function trimCharLength(senderId) {
   taskDiv = allDiv[1];
 
   let taskContentLength = taskDiv.offsetWidth;
-  let newTaskContent = taskDiv.innerHTML.trim();
+  let newTaskContent = taskDiv.textContent.trim();
 
   if (taskContentLength <= targetLength) return newTaskContent;
 
   while (taskContentLength > targetLength) {
     newTaskContent = newTaskContent.substring(0, newTaskContent.length - 1);
-    taskDiv.innerHTML = newTaskContent;
+    taskDiv.textContent = newTaskContent;
     taskContentLength = taskDiv.offsetWidth;
   }
 
