@@ -1,5 +1,5 @@
-## Twitch Task List Widget - WIP (Work in Progress)
+## Twitch Task List Widget
 
-This is not yet complete.
+For instructions on how to set up, it is similar to the [Timer](https://github.com/mohamed-tayeh/Minimal-Pomo-Timer) and the [Locale](https://github.com/mohamed-tayeh/locale-overlay) overlays.
 
-**Use at your own risk** as I am working on a new one, hence the lack of documentation.
+I haven't added documentation to this one because I am working on building a much better one:D
