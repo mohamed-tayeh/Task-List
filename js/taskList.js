@@ -112,7 +112,8 @@
         client.say(target, finalMsg);
       } else if (commands.adminDeleteCommands.indexOf(command) > -1) {
         const isMod = context['mod'];
-        const isBroadCaster = context['username'] === configs.user.channel;
+        const isBroadCaster =
+          context['username'].toLowerCase() === user.channel.toLowerCase();
         let finalMsg;
 
         if (isMod || isBroadCaster) {
