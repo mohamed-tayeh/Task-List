@@ -10,7 +10,10 @@ let configs = (function () {
   const width = '376px';
   const textColor = 'white'; //  hex or name
   const backgroundColor = '#000000'; // hex only
-  const backgroundOpacity = 0; // 0 to 1 (0 is transparent)
+  const backgroundOpacity = 0.5; // 0 to 1 (0 is transparent)
+  const fontFamily = 'Poppins';
+  // supports all google fonts - https://fonts.google.com/
+  // Please ensure to type it exactly like on the google website
 
   // Add task commands
   const addTaskCommands = [
@@ -105,6 +108,7 @@ let configs = (function () {
     backgroundOpacity,
     height,
     width,
+    fontFamily,
   };
 
   const commands = {

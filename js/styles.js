@@ -4,6 +4,8 @@
   const styles = configs.styles;
 
   function customStyles() {
+    loadGoogleFont(styles.fontFamily);
+
     document.documentElement.style.setProperty('--height', styles.height);
     document.documentElement.style.setProperty('--width', styles.width);
 
@@ -28,6 +30,22 @@
       '--text-color',
       styles.textColor
     );
+    document.documentElement.style.setProperty(
+      '--font-family',
+      styles.fontFamily
+    );
+  }
+
+  /**
+   * Dynamically loads a google font
+   * @param {string} font
+   */
+  function loadGoogleFont(font) {
+    WebFont.load({
+      google: {
+        families: [font],
+      },
+    });
   }
 
   window.addEventListener('load', customStyles);
