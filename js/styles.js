@@ -34,6 +34,21 @@
       '--font-family',
       styles.fontFamily
     );
+
+    document.documentElement.style.setProperty(
+      '--font-family',
+      styles.fontFamily
+    );
+
+    document.documentElement.style.setProperty(
+      '--check-box-color',
+      styles.checkBoxColor
+    );
+
+    document.documentElement.style.setProperty(
+      '--tick-color',
+      styles.tickColor
+    );
   }
 
   /**

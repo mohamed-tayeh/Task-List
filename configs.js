@@ -11,6 +11,8 @@ let configs = (function () {
   const textColor = 'white'; //  hex or name
   const backgroundColor = '#000000'; // hex only
   const backgroundOpacity = 0.5; // 0 to 1 (0 is transparent)
+  const checkBoxColor = '#fff'; // hex or name
+  const tickColor = '#fff'; // hex or name
   const fontFamily = 'Poppins';
   // supports all google fonts - https://fonts.google.com/
   // Please ensure to type it exactly like on the google website
@@ -108,6 +110,8 @@ let configs = (function () {
     backgroundOpacity,
     height,
     width,
+    checkBoxColor,
+    tickColor,
     fontFamily,
   };
 

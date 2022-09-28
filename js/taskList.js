@@ -517,28 +517,28 @@
         addTask('moh_t' + i.toString(), 'this is not a long task');
       }
 
-      for (let i = 0; i < 20; i++) {
-        finishTask('moh_t' + i.toString());
-      }
+      // for (let i = 0; i < 20; i++) {
+      //   finishTask('moh_t' + i.toString());
+      // }
 
-      editTask(
-        'moh_t20',
-        'this is a long task that i dont think would be able to fit into one line'
-      );
+      // editTask(
+      //   'moh_t20',
+      //   'this is a long task that i dont think would be able to fit into one line'
+      // );
 
-      deleteTask('moh_t21');
+      // deleteTask('moh_t21');
 
-      for (let i = 0; i < 20; i++) {
-        addTask('moh_t' + i.toString(), 'this is not a long task');
-      }
+      // for (let i = 0; i < 20; i++) {
+      //   addTask('moh_t' + i.toString(), 'this is not a long task');
+      // }
 
-      for (let i = 0; i < 20; i++) {
-        deleteTask('moh_t' + i.toString());
-      }
+      // for (let i = 0; i < 20; i++) {
+      //   deleteTask('moh_t' + i.toString());
+      // }
 
-      for (let i = 0; i < 20; i++) {
-        addTask('moh_t' + i.toString(), 'hi');
-      }
+      // for (let i = 0; i < 20; i++) {
+      //   addTask('moh_t' + i.toString(), 'hi');
+      // }
 
       // setTimeout(() => {
       //   for (let i = 10; i < 30; i++) {
@@ -570,7 +570,7 @@
       // }
     }
 
-    // runTests();
+    runTests();
   });
 })();
 // ! TBD

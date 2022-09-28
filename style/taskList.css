@@ -8,6 +8,8 @@
   --background-blue: 0;
   --background-opacity: 0;
   --font-family: 'Poppins';
+  --check-box-color: '';
+  --tick-color: '';
 }
 
 body {
@@ -107,7 +109,7 @@ input[type='checkbox'] {
 
 input[type='checkbox'] + label {
   display: inline-block;
-  border: 1px solid #fff;
+  border: 1px solid var(--check-box-color);
   border-radius: 3px;
   width: 10px;
   height: 10px;
@@ -117,6 +119,7 @@ input[type='checkbox'] + label {
 
 input[type='checkbox']:checked + label:after {
   content: '✔';
+  color: var(--tick-color);
   display: grid;
   width: 10px;
   height: 10px;
