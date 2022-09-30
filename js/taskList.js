@@ -266,7 +266,7 @@
           `.${constants.taskContentClass}`
         );
         taskContentDiv[0].textContent = taskContent;
-
+        tasksMap[senderId] = taskContent;
         editDuplicate(senderId, taskContent);
         updateAnimation();
 
