@@ -1,10 +1,10 @@
 let configs = (function () {
   'use strict';
 
-  // Authentication and channels
-  const channel = '';
-  const username = '';
-  const oauth = ''; // Should be oauth:<token>
+  // Authentication and channels - required
+  const channel = ''; // your channel
+  const username = ''; // bot account
+  const oauth = ''; // should be oauth:xxxxxxxxxxxx from the bot account
 
   const height = '570px';
   const width = '376px';
@@ -71,6 +71,7 @@ let configs = (function () {
     '!ctask',
     '!checktask',
     '!mytask',
+    '!check',
   ];
 
   // Help commands
