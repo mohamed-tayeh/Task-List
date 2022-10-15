@@ -292,6 +292,8 @@
       taskDiv.remove();
 
       delete tasksMap[senderId];
+      tasks--;
+      updateTasksNumber();
 
       updateAnimation();
 

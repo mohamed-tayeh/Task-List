@@ -62,6 +62,7 @@ let configs = (function () {
     '!dtask',
     '!finish',
     '!done',
+    '!finished',
   ];
 
   // Check task commands
