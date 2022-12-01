@@ -642,9 +642,9 @@
         if (senderDiv.textContent === senderId) {
           taskDiv.remove();
 
-          let checkbox = taskDiv.querySelector(`#checkbox-${senderId}`);
-
           if (!taskDiv.classList.contains(constants.cloneLabel)) {
+            let checkbox = taskDiv.querySelector(`#checkbox-${senderId}`);
+
             if (checkbox.checked) {
               numDoneDeleted += 1;
             }
