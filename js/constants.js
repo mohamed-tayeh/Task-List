@@ -4,6 +4,8 @@ let constants = (function () {
   let module = {};
 
   // Class and IDs
+  module.mainContainerId = 'main-container';
+  module.headerClass = 'header';
   module.taskWrapperClass = 'task-wrapper';
   module.taskContainerId = 'task-container';
   module.titleId = 'title';
@@ -15,6 +17,9 @@ let constants = (function () {
   module.tasksTrackerName = 'tasksTracker';
   module.tasksTotalName = 'tasksTotal';
   module.checkboxClass = 'checkbox';
+  module.horizontalClass = 'horizontal';
+  module.colonClass = 'colon';
+  module.finishedClass = 'finished';
 
   // Number of tasks supported
   module.pxCutOffLength = 475;
