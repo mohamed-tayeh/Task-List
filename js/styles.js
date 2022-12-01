@@ -49,6 +49,32 @@
       '--tick-color',
       styles.tickColor
     );
+
+    document.documentElement.style.setProperty('--font-size', styles.fontSize);
+    document.documentElement.style.setProperty(
+      '--check-box-size',
+      styles.checkBoxSize
+    );
+
+    document.documentElement.style.setProperty(
+      '--header-font-size',
+      styles.headerFontSize
+    );
+
+    if (styles.horizontal) {
+      const elements = [
+        document.querySelector(`#${constants.mainContainerId}`),
+        document.querySelector(`.${constants.headerClass}`),
+        document.querySelector(`#${constants.titleId}`),
+        document.querySelector(`#${constants.tasksNumber}`),
+        document.querySelector(`.${constants.taskWrapperClass}`),
+        document.querySelector(`#${constants.taskContainerId}`),
+      ];
+
+      elements.forEach((el) => {
+        el.classList.add(constants.horizontalClass);
+      });
+    }
   }
 
   /**
