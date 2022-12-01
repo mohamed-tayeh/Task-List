@@ -23,7 +23,7 @@ let configs = (function () {
   const fontFamily = 'Lato'; // supports all google fonts - https://fonts.google.com/
   // Please ensure to type it exactly like on the google website
 
-  // Add task commands - please keep it in the exact format
+  // Add task commands - please add commands in the exact format
   const addTaskCommands = [
     '!taska',
     '!taskadd',
@@ -33,7 +33,7 @@ let configs = (function () {
     '!add',
   ];
 
-  // Delete task commands - please keep it in the exact format
+  // Delete task commands - please add commands in the exact format
   const deleteTaskCommands = [
     '!taskdel',
     '!taskdelete',
@@ -47,7 +47,7 @@ let configs = (function () {
     '!delete',
   ];
 
-  // Edit task commands - please keep it in the exact format
+  // Edit task commands - please add commands in the exact format
   const editTaskCommands = [
     '!taske',
     '!taskedit',
@@ -56,7 +56,7 @@ let configs = (function () {
     '!edit',
   ];
 
-  // Finish task commands - please keep it in the exact format
+  // Finish task commands - please add commands in the exact format
   const finishTaskCommands = [
     '!taskf',
     '!taskfinish',
@@ -71,7 +71,7 @@ let configs = (function () {
     '!finished',
   ];
 
-  // Check task commands - please keep it in the exact format
+  // Check task commands - please add commands in the exact format
   const checkCommands = [
     '!taskc',
     '!taskcheck',
@@ -81,10 +81,10 @@ let configs = (function () {
     '!check',
   ];
 
-  // Help commands - please keep it in the exact format
+  // Help commands - please add commands in the exact format
   const helpCommands = ['!taskh', '!taskhelp', '!htask', '!helptask', '!tasks'];
 
-  // Admin delete - please keep it in the exact format
+  // Admin delete - please add commands in the exact format
   const adminDeleteCommands = [
     '!taskadel',
     '!adel',
