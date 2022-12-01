@@ -6,18 +6,24 @@ let configs = (function () {
   const username = ''; // bot account
   const oauth = ''; // should be oauth:xxxxxxxxxxxx from the bot account
 
-  const height = '570px';
-  const width = '376px';
+  const horizontal = false; // true or false
+  const headerFontSize = '18px'; // must have px at the end
+  const fontSize = '14px'; // must have px at the end
+  const height = '500px'; // must have px at the end
+  const width = '300px'; // must have px at the end
   const textColor = 'white'; //  hex or name
   const backgroundColor = '#000000'; // hex only
-  const backgroundOpacity = 0.5; // 0 to 1 (0 is transparent)
+  const backgroundOpacity = 0.76; // 0 to 1 (0 is transparent)
   const checkBoxColor = '#fff'; // hex or name
+  const checkBoxSize = '8px'; // must have px at the end
   const tickColor = '#fff'; // hex or name
-  const fontFamily = 'Poppins';
-  // supports all google fonts - https://fonts.google.com/
+  const crossOnFinish = false; // true or false
+  const pixelsPerSecond = 50; // amount of time to scroll per second
+  const chatterColor = ''; // empty '' if you want twitch chat colors, otherwise hex only
+  const fontFamily = 'Lato'; // supports all google fonts - https://fonts.google.com/
   // Please ensure to type it exactly like on the google website
 
-  // Add task commands
+  // Add task commands - please keep it in the exact format
   const addTaskCommands = [
     '!taska',
     '!taskadd',
@@ -27,7 +33,7 @@ let configs = (function () {
     '!add',
   ];
 
-  // Delete task commands
+  // Delete task commands - please keep it in the exact format
   const deleteTaskCommands = [
     '!taskdel',
     '!taskdelete',
@@ -41,7 +47,7 @@ let configs = (function () {
     '!delete',
   ];
 
-  // Edit task commands
+  // Edit task commands - please keep it in the exact format
   const editTaskCommands = [
     '!taske',
     '!taskedit',
@@ -50,7 +56,7 @@ let configs = (function () {
     '!edit',
   ];
 
-  // Finish task commands
+  // Finish task commands - please keep it in the exact format
   const finishTaskCommands = [
     '!taskf',
     '!taskfinish',
@@ -65,7 +71,7 @@ let configs = (function () {
     '!finished',
   ];
 
-  // Check task commands
+  // Check task commands - please keep it in the exact format
   const checkCommands = [
     '!taskc',
     '!taskcheck',
@@ -75,30 +81,34 @@ let configs = (function () {
     '!check',
   ];
 
-  // Help commands
+  // Help commands - please keep it in the exact format
   const helpCommands = ['!taskh', '!taskhelp', '!htask', '!helptask', '!tasks'];
 
-  // Admin delete
-  const adminDeleteCommands = ['!taskadel'];
+  // Admin delete - please keep it in the exact format
+  const adminDeleteCommands = [
+    '!taskadel',
+    '!adel',
+    '!adelete',
+    '!admindelete',
+  ];
 
   // Responses
-  const taskAdded = 'Task has been added ';
-  const noTaskAdded = 'Looks like you already have a task up there ';
-  const noTaskContent = 'Try using !taska <the-task-you-are-working-on> ';
-  const noTaskButEdited =
-    "Looks like you didn't have a task to edit, no worries tho I gotchu ";
-  const taskEdited = 'Task has been edited ';
-  const taskDeleted = 'Task has been deleted, no problemo ';
-  const taskFinished1 = 'Good job on finishing your task ';
-  const taskFinished2 = ' SeemsGood Here is a cookie NomNom';
-  const noTask = "Looks like you don't have a task up there ";
-  const noTaskA = 'Looks like there is no task from that user there ';
-  const notMod = "hhhhhhh you're not a mod ";
-  const help =
-    ' Use the following commands to help you out - !taska (add) ' +
-    '!taskdel (delete) !taske (edit) !taskf (finish). There ' +
-    'additional aliases as well. If you need any more help, ' +
-    'feel free to ping an available mod to assist you!';
+  const taskAdded = 'Task "{task}" has been added {user}';
+  const noTaskAdded = 'Looks like you already have "{task}" up there {user}';
+  const noTaskContent = 'Try using !add the-task-you-are-working-on {user}';
+  const noTaskButEdited = 'No task to edit, but I added "{task}" (: {user}';
+  const taskEdited = 'Task edited to "{task}" {user}';
+  const taskDeleted = 'Task "{task}" has been deleted, no problemo {user}';
+  const modDeletedTasks = "All of the user's tasks have been deleted";
+  const taskFinished =
+    'Good job on finishing "{task}" {user} - here is a cookie NomNom';
+  const taskCheck = '{user} your current task is: "{task}"';
+  const noTask = "Looks like you don't have a task up there {user}";
+  const noTaskA = 'Looks like there is no task from that user there {user}';
+  const notMod = "hhhhhhh you're not a mod {user}";
+  const help = `{user} Use the following commands to help you out - !add !delete !edit !done. For mods !adel @user
+    or !adel user. There additional aliases as well. If you need any more help, feel free to ping 
+    an available mod to assist you!`;
 
   const user = {
     channel,
@@ -115,6 +125,13 @@ let configs = (function () {
     checkBoxColor,
     tickColor,
     fontFamily,
+    horizontal,
+    fontSize,
+    headerFontSize,
+    crossOnFinish,
+    pixelsPerSecond,
+    chatterColor,
+    checkBoxSize,
   };
 
   const commands = {
@@ -134,12 +151,13 @@ let configs = (function () {
     taskDeleted,
     taskEdited,
     noTaskButEdited,
-    taskFinished1,
-    taskFinished2,
+    taskFinished,
+    taskCheck,
     noTask,
     noTaskA,
     notMod,
     help,
+    modDeletedTasks,
   };
 
   let module = {};
