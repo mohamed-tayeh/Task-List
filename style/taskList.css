@@ -125,18 +125,23 @@ body {
 }
 
 .colon {
-  display: grid;
+  display: flex;
   color: var(--text-color);
   padding-right: 5px;
+  align-items: center;
 }
 
 .colon.horizontal {
-  place-items: center;
+  justify-content: center;
 }
 
 .sender,
 .task-content {
-  display: grid;
+  display: flex;
+}
+
+.sender {
+  align-items: center;
 }
 
 .task-content.horizontal {
@@ -154,15 +159,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  margin-top: auto;
-  margin-bottom: 1px;
 }
 
 .checkbox.horizontal {
   margin: 0;
   margin-top: 4px;
-  place-items: center;
 }
 
 input[type='checkbox'] {
