@@ -9,18 +9,18 @@ let configs = (function () {
   const horizontal = false; // true or false
   const headerFontSize = '18px'; // must have px at the end
   const fontSize = '14px'; // must have px at the end
-  const height = '500px'; // must have px at the end
-  const width = '300px'; // must have px at the end
+  const height = '565px'; // must have px at the end
+  const width = '376px'; // must have px at the end
   const textColor = 'white'; //  hex or name
   const backgroundColor = '#000000'; // hex only
-  const backgroundOpacity = 0.76; // 0 to 1 (0 is transparent)
+  const backgroundOpacity = 0.5; // 0 to 1 (0 is transparent)
   const checkBoxColor = '#fff'; // hex or name
   const checkBoxSize = '8px'; // must have px at the end
   const tickColor = '#fff'; // hex or name
-  const crossOnFinish = false; // true or false
+  const crossOnFinish = true; // true or false
   const pixelsPerSecond = 50; // amount of time to scroll per second
   const chatterColor = ''; // empty '' if you want twitch chat colors, otherwise hex only
-  const fontFamily = 'Lato'; // supports all google fonts - https://fonts.google.com/
+  const fontFamily = 'Poppins'; // supports all google fonts - https://fonts.google.com/
   // Please ensure to type it exactly like on the google website
 
   // Add task commands - please add commands in the exact format
@@ -84,12 +84,20 @@ let configs = (function () {
   // Help commands - please add commands in the exact format
   const helpCommands = ['!taskh', '!taskhelp', '!htask', '!helptask', '!tasks'];
 
-  // Admin delete - please add commands in the exact format
+  // Admin delete - please add commands following the exact format
   const adminDeleteCommands = [
     '!taskadel',
     '!adel',
     '!adelete',
     '!admindelete',
+  ];
+
+  // Admin clear done - please add commands following the exact format
+  const adminClearDoneCommands = [
+    '!aclear',
+    '!adminclear',
+    '!clearadmin',
+    '!taskaclear',
   ];
 
   // Responses
@@ -142,6 +150,7 @@ let configs = (function () {
     helpCommands,
     checkCommands,
     adminDeleteCommands,
+    adminClearDoneCommands,
   };
 
   const responses = {
