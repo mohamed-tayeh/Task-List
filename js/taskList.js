@@ -128,6 +128,9 @@
         let finalMsg = checkTask(senderId);
 
         client.say(target, finalMsg);
+      } else if (commands.helpCommands.indexOf(command) > -1) {
+        let finalMsg = replaceStrings(responses.help, senderId);
+        client.say(target, finalMsg);
       } else if (commands.adminDeleteCommands.indexOf(command) > -1) {
         const isMod = context['mod'];
         const isBroadCaster =
@@ -154,9 +157,8 @@
         }
 
         client.say(target, finalMsg);
-      } else if (commands.helpCommands.indexOf(command) > -1) {
-        let finalMsg = replaceStrings(responses.help, senderId);
-        client.say(target, finalMsg);
+      } else if (commands.adminClearDoneCommands.indexOf(command) > -1) {
+        deleteFinishedTasks();
       }
     }
 
@@ -259,7 +261,6 @@
 
       // handles infinite scroll
       updateAnimation();
-
       return true;
     }
 
@@ -663,6 +664,16 @@
       return numDeleted > 0;
     }
 
+    function deleteFinishedTasks() {
+      const taskDivs = document.getElementsByClassName(constants.taskDivClass);
+      Array.from(taskDivs).forEach((taskDiv) => {
+        if (taskDiv.getElementsByClassName(constants.finishedClass).length) {
+          taskDiv.remove();
+        }
+      });
+      updateAnimation();
+    }
+
     /**
      * Console logs when the timer connects to the channel
      */
@@ -695,8 +706,8 @@
       //   finishTask('sussybaka');
       // }
       // // ? Adding tasks test
-      // for (let i = 0; i < 20; i++)
-      //   addTask('moh_t' + i.toString(), 'this is a task');
+      // for (let i = 0; i < 30; i++)
+      //   addTask('moh_t' + i.toString(), 'this is a task', 'red');
       // await sleep(2000);
       // // ? Finishing tasks test
       // for (let i = 0; i < 10; i++) finishTask('moh_t' + i.toString());
@@ -709,8 +720,9 @@
       // ? Delete non-exist task test
       // deleteTask('moh_t21');
       // ? adding more tasks
-      // for (let i = 0; i < 20; i++)
+      // for (let i = 0; i < 30; i++)
       //   addTask('moh_t' + i.toString(), 'this is not a long task');
+      // for (let i = 0; i < 20; i++) finishTask('moh_t' + i.toString());
       // ? deleting the previous tasks
       // for (let i = 0; i < 20; i++) deleteTask('moh_t' + i.toString());
       // ? adding tasks after a delay
