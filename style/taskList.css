@@ -1,5 +1,4 @@
 :root {
-  --number-of-tasks: 0;
   --text-color: 'white';
   --height: '605px';
   --width: '500px';
@@ -128,7 +127,7 @@ body {
   display: flex;
   color: var(--text-color);
   padding-right: 5px;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .colon.horizontal {
@@ -141,7 +140,7 @@ body {
 }
 
 .sender {
-  align-items: center;
+  align-items: flex-start;
 }
 
 .task-content.horizontal {
@@ -158,7 +157,8 @@ body {
 .checkbox {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  margin-top: 2px;
 }
 
 .checkbox.horizontal {
