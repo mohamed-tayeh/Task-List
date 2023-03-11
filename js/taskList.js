@@ -31,7 +31,7 @@
 
     let taskContainerEl = document.querySelector('#task-container');
 
-    let tasksMap = {};
+    let currTasksMap = {};
     let tasksDone = 0;
     let tasks = 0;
 
@@ -74,13 +74,13 @@
           finalMsg = replaceStrings(responses.taskAdded, senderId, taskContent);
         } else {
           // there already exists a task
-          let task = tasksMap[senderId];
+          let task = currTasksMap[senderId];
           finalMsg = replaceStrings(responses.noTaskAdded, senderId, task);
         }
 
         client.say(target, finalMsg);
       } else if (commands.finishTaskCommands.indexOf(command) > -1) {
-        let task = tasksMap[senderId];
+        let task = currTasksMap[senderId];
         const finished = finishTask(senderId);
 
         let finalMsg;
@@ -112,7 +112,7 @@
 
         client.say(target, finalMsg);
       } else if (commands.deleteTaskCommands.indexOf(command) > -1) {
-        let task = tasksMap[senderId]; // original task or undefined
+        let task = currTasksMap[senderId]; // original task or undefined
         const deleted = deleteTask(senderId);
 
         let finalMsg;
@@ -140,7 +140,7 @@
         if (isMod || isBroadCaster) {
           if (taskContent.charAt(0) === '@') taskContent = taskContent.slice(1);
           taskContent = taskContent.toLowerCase();
-          let task = tasksMap[taskContent];
+          let task = currTasksMap[taskContent];
           const deleted = deleteAllDivsFromSender(taskContent);
 
           if (deleted) {
@@ -159,6 +159,7 @@
         client.say(target, finalMsg);
       } else if (commands.adminClearDoneCommands.indexOf(command) > -1) {
         deleteFinishedTasks();
+        client.say(target, responses.adminClear);
       }
     }
 
@@ -171,7 +172,7 @@
      */
     function addTask(senderId, taskContent, color = undefined) {
       // if the user already has a task - no new task
-      if (tasksMap.hasOwnProperty(senderId)) return false;
+      if (currTasksMap.hasOwnProperty(senderId)) return false;
 
       // Otherwise create a task div
       let taskDiv = document.createElement('div');
@@ -227,7 +228,7 @@
       }
 
       // keeps track of the tasks and animation
-      tasksMap[senderId] = taskContent;
+      currTasksMap[senderId] = taskContent;
       tasks++;
       updateTasksNumber();
 
@@ -275,7 +276,7 @@
      * @author Mohamed Tayeh
      */
     function finishTask(senderId) {
-      if (!tasksMap.hasOwnProperty(senderId)) return false;
+      if (!currTasksMap.hasOwnProperty(senderId)) return false;
 
       let taskDiv = document.getElementById(senderId);
       let checkbox = taskDiv.querySelector(`#checkbox-${senderId}`);
@@ -289,7 +290,7 @@
       }
       finishDuplicate(senderId);
 
-      delete tasksMap[senderId];
+      delete currTasksMap[senderId];
 
       tasksDone++;
       updateTasksNumber();
@@ -304,13 +305,13 @@
      * @param {string} taskContent - Content of the div to add
      */
     function editTask(senderId, taskContent, color) {
-      if (tasksMap.hasOwnProperty(senderId)) {
+      if (currTasksMap.hasOwnProperty(senderId)) {
         let taskDiv = document.getElementById(senderId);
         let taskContentDiv = taskDiv.querySelectorAll(
           `.${constants.taskContentClass}`
         );
         taskContentDiv[0].textContent = taskContent;
-        tasksMap[senderId] = taskContent;
+        currTasksMap[senderId] = taskContent;
         editDuplicate(senderId, taskContent);
         updateAnimation();
 
@@ -327,14 +328,14 @@
      * @param {string} senderId - ID of the div to add
      */
     function deleteTask(senderId) {
-      if (!tasksMap.hasOwnProperty(senderId)) return false;
+      if (!currTasksMap.hasOwnProperty(senderId)) return false;
 
       deleteDuplicate(senderId);
 
       let taskDiv = document.getElementById(senderId);
       taskDiv.remove();
 
-      delete tasksMap[senderId];
+      delete currTasksMap[senderId];
       tasks--;
       updateTasksNumber();
 
@@ -347,11 +348,11 @@
      * Checks the task of the user
      */
     function checkTask(senderId) {
-      if (tasksMap.hasOwnProperty(senderId)) {
+      if (currTasksMap.hasOwnProperty(senderId)) {
         return replaceStrings(
           responses.taskCheck,
           senderId,
-          tasksMap[senderId]
+          currTasksMap[senderId]
         );
       } else {
         return replaceStrings(responses.noTask, senderId);
@@ -414,11 +415,6 @@
         }, 100);
       }
 
-      document.documentElement.style.setProperty(
-        '--number-of-tasks',
-        getTasksNumber()
-      );
-
       checkForLooping();
     }
 
@@ -459,15 +455,16 @@
           `#${constants.taskContainerId}`
         ).scrollHeight;
 
+        if (duplicatesAdded) {
+          // the real height of the tasks
+          taskContainerHeight = taskContainerHeight / 2;
+        }
+
         if (taskContainerHeight > taskWrapperHeight && !duplicatesAdded) {
           duplicatesAdded = true;
           startLooping();
         } else if (taskContainerHeight > taskWrapperHeight && duplicatesAdded) {
           // update animation loop if it is already looping
-          let taskContainerHeight =
-            document.querySelector(`#${constants.taskContainerId}`)
-              .scrollHeight / 2;
-
           document.getElementById(
             constants.taskContainerId
           ).style.animation = `scroll ${
@@ -597,7 +594,7 @@
     }
 
     function getTasksNumber() {
-      return Object.keys(tasksMap).length;
+      return Object.keys(currTasksMap).length;
     }
 
     function replaceStrings(msg, senderId = '', taskContent = '') {
@@ -657,7 +654,7 @@
 
       tasksDone -= numDoneDeleted;
       tasks -= numDeleted;
-      delete tasksMap[senderId];
+      delete currTasksMap[senderId];
       updateTasksNumber();
       updateAnimation();
 
@@ -667,7 +664,9 @@
     function deleteFinishedTasks() {
       const taskDivs = document.getElementsByClassName(constants.taskDivClass);
       Array.from(taskDivs).forEach((taskDiv) => {
-        if (taskDiv.getElementsByClassName(constants.finishedClass).length) {
+        if (
+          taskDiv.getElementsByClassName(constants.finishedClass).length > 0
+        ) {
           taskDiv.remove();
         }
       });
@@ -685,64 +684,84 @@
       return new Promise((r) => setTimeout(r, ms));
     }
 
-    async function runTests() {
-      // ? Color test
-      // let colors = ['red', 'blue', 'yellow', 'green', 'pink', 'purple'];
-      // let names = ['moh', 'zee', 'limon', 'mohfocus', 'mileevili', 'roro'];
-      // for (let i = 0; i < 6; i++) {
-      //   addTask(names[i], 'this is not a long task', colors[i]);
-      //   finishTask(names[i]);
-      // }
-      // for (let i = 0; i < 6; i++) {
-      //   addTask(names[i], 'this is not a long task', colors[i]);
-      //   finishTask(names[i]);
-      // }
-      // for (let i = 0; i < 6; i++) {
-      //   addTask(names[i], 'this is not a long task', colors[i]);
-      // }
-      // for (let i = 0; i < 20; i++) {
-      //   addTask('sussybaka', 'this is a task', 'red');
-      //   await sleep(500);
-      //   finishTask('sussybaka');
-      // }
-      // // ? Adding tasks test
-      // for (let i = 0; i < 30; i++)
-      //   addTask('moh_t' + i.toString(), 'this is a task', 'red');
-      // await sleep(2000);
-      // // ? Finishing tasks test
-      // for (let i = 0; i < 10; i++) finishTask('moh_t' + i.toString());
-      // await sleep(2000);
-      // ? Edit non-exist task test
-      // editTask(
-      //   'moh_t20',
-      //   'this is a long task that will not fit in oneline that it will need to be split into two'
-      // );
-      // ? Delete non-exist task test
-      // deleteTask('moh_t21');
+    async function testColors() {
+      let colors = ['red', 'blue', 'yellow', 'green', 'pink', 'purple'];
+      let names = ['moh', 'zee', 'limon', 'mohfocus', 'mileevili', 'roro'];
+      for (let i = 0; i < 6; i++) {
+        addTask(names[i], 'this is not a long task', colors[i]);
+        finishTask(names[i]);
+      }
+
+      for (let i = 0; i < 6; i++) {
+        addTask(names[i], 'this is not a long task', colors[i]);
+        finishTask(names[i]);
+      }
+
+      for (let i = 0; i < 6; i++) {
+        addTask(names[i], 'this is not a long task', colors[i]);
+      }
+    }
+
+    async function testAddFinishManyTasks() {
+      for (let i = 0; i < 20; i++) {
+        addTask('sussybaka', 'this is a task', 'red');
+        await sleep(500);
+        finishTask('sussybaka');
+      }
+    }
+
+    async function addOverflowTasks() {
+      for (let i = 0; i < 30; i++)
+        addTask('moh_t' + i.toString(), 'this is a task', 'red');
+    }
+
+    async function addOverflowTasksAndFinish() {
+      await addOverflowTasks();
+      for (let i = 0; i < 10; i++) {
+        finishTask('moh_t' + i.toString());
+      }
+    }
+
+    async function addManyLongTasks() {
+      for (let i = 0; i < 30; i++) {
+        addTask(
+          'moh_t' + i,
+          'this is a long task that will not fit in oneline that it will need to be split into two'
+        );
+      }
+    }
+
+    async function editNonExistTask() {
+      editTask(
+        'moh_t20',
+        'this is a long task that will not fit in oneline that it will need to be split into two'
+      );
+    }
+
+    async function deleteNonExistTask() {
+      deleteTask('moh_t21');
+    }
+
+    async function addManyTasksThenDelete() {
       // ? adding more tasks
-      // for (let i = 0; i < 30; i++)
-      //   addTask('moh_t' + i.toString(), 'this is not a long task');
-      // for (let i = 0; i < 20; i++) finishTask('moh_t' + i.toString());
+      for (let i = 0; i < 30; i++)
+        addTask('moh_t' + i, 'this is not a long task');
+      for (let i = 0; i < 20; i++) finishTask('moh_t' + i);
       // ? deleting the previous tasks
-      // for (let i = 0; i < 20; i++) deleteTask('moh_t' + i.toString());
-      // ? adding tasks after a delay
-      // await sleep(2000);
-      //   for (let i = 20; i < 30; i++) addTask('moh_t' + i.toString(), 'hi');
-      // ? Add and immediately finish tasks test
-      // for (let i = 0; i < 20; i++) {
-      //   addTask('moh_t' + i.toString(), 'this is a task');
-      //   finishTask('moh_t' + i.toString());
-      // }
+      deleteFinishedTasks();
+    }
+
+    async function runTests() {
+      // await testColors();
+      // await testAddFinishManyTasks();
+      // await addOverflowTasks();
+      // await addOverflowTasksAndFinish();
+      // await addManyLongTasks();
+      // await editNonExistTask();
+      // await deleteNonExistTask();
+      // await addManyTasksThenDelete();
     }
 
     runTests();
   });
 })();
-// ! TBD
-// tasksTracker = api.getTasksTracker();
-// console.log(tasksTracker);
-
-// taskContainerEl = document.getElementById(constants.taskContainerId);
-
-// addTask('moh_t', tasksTracker[0]);
-// api.setTasksTracker(tasksTracker);

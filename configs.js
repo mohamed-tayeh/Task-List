@@ -114,6 +114,7 @@ let configs = (function () {
   const noTask = "Looks like you don't have a task up there {user}";
   const noTaskA = 'Looks like there is no task from that user there {user}';
   const notMod = "hhhhhhh you're not a mod {user}";
+  const adminClear = 'All done tasks have been cleared';
   const help = `{user} Use the following commands to help you out - !add !delete !edit !done. For mods !adel @user
     or !adel user. There additional aliases as well. If you need any more help, feel free to ping 
     an available mod to assist you!`;
@@ -167,6 +168,7 @@ let configs = (function () {
     notMod,
     help,
     modDeletedTasks,
+    adminClear,
   };
 
   let module = {};
